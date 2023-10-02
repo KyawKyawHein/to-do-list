@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <style>
+        .app{
+            background-color: #0dcaf0;
+            height: 500px;
+            border-radius: 10px;
+            padding: 0px 15px;
+            box-shadow: 2px 5px 10px #000000;
+            overflow-y: scroll;
+            position: relative;
+        }
+        .header{
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            background-color: #0dcaf0;
+            margin-top: 10px;
+        }
+        .title{
+            font-style: italic;
+            text-decoration: underline;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .input-row{
+        }
+        .btn-add{
+
+        }
+        .to-do-text{
+        }
+        .list-text{
+            list-style-type: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: #000000;
+            font-weight: bolder;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-5 m-auto mt-5">
+                            <div class="app">
+                                <div class="header">
+                                    <h2 class="title">To Do List</h2>
+                                    <div class="input-row d-flex align-items-center pb-3">
+                                        <input type="text" class="form-control me-2" autofocus id="input">
+                                        <button class="btn-add btn btn-primary w-25" id="btnAdd">Add</button>
+                                    </div>
+                                </div>
+                                <div class="to-do-text">
+                                    <ul class="ps-0" id="list">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+<!--    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>-->
+    <script src="app.js"></script>
+</body>
+</html>

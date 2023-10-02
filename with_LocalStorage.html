@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <style>
+        body{
+            background-color: #3dd5f3;
+        }
+        #inputText{
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+                <div class="">
+                    <input type="text" id="inputText" class="form-control" autofocus>
+                    <ul id="list" class="mb-3 ps-0">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        let inputText = document.getElementById("inputText");
+        let list = document.getElementById('list');
+        let count;
+        let keys = Object.keys(localStorage).sort();
+        if(localStorage.length == 0){
+            count =1;
+        }else{
+            count = localStorage.length+1;
+        }
+
+        //process 001
+        inputText.addEventListener("keyup",(e)=>{
+            if(e.key == "Enter"){
+                let value = inputText.value.trim();
+                if(value == ""){
+                    alert("You wrote nothing.")
+                }else{
+                    addLocalStorage(value);
+                    let keys = Object.keys(localStorage).sort();
+                    console.log(keys);
+                    showListItem(value,Number(keys[keys.length-1]));
+                }
+                inputText.value = "";
+            }
+        });
+
+        //function for show item in list
+        function showListItem(data,key){
+            let li = document.createElement("li");
+            let text = document.createTextNode(data);
+            li.classList = "list-unstyled font-monospace fs-2 fst-italic animate__animated animate__fadeInLeft border border-1 bg-light p-2 rounded mt-3 d-flex justify-content-between";
+            li.appendChild(text);
+
+            let div = document.createElement("div");
+            let btnEdit = document.createElement("button");
+            btnEdit.classList = "fas fa-edit btn btn-outline-primary me-2 ";
+            btnEdit.id = `edit${key}`;
+
+            let btnDel = document.createElement("button");
+            btnDel.classList = "fas fa-heart-broken btn btn-outline-primary";
+            btnDel.id = `del${key}`;
+            btnDel.setAttribute("onclick",`del(${key})`);
+
+            div.appendChild(btnEdit);
+            div.appendChild(btnDel);
+            li.appendChild(div);
+            list.appendChild(li);
+        };
+
+        //for adding to localstorage
+        function addLocalStorage(data){
+            localStorage.setItem(count,data);
+            count++;
+        }
+
+        //for deletion listitem in li and localstorage
+        function del(value){
+            let currentId = document.getElementById(`del${value}`);
+            currentId.parentElement.parentElement.remove();
+            localStorage.removeItem(`${value}`);
+        }
+
+        //self made function to show data from localStorage
+        (function (){
+            console.log(keys);
+            keys.map(el=>{
+                showListItem(localStorage.getItem(el));
+                console.log(localStorage.getItem(el));
+            });
+        })();
+    </script>
+</body>
+</html>
